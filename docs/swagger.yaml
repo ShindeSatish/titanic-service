@@ -1,0 +1,132 @@
+basePath: /v1
+definitions:
+  model.Passenger:
+    properties:
+      Age:
+        type: number
+      Cabin:
+        type: string
+      Embarked:
+        type: string
+      Fare:
+        type: number
+      Name:
+        type: string
+      Parch:
+        type: integer
+      PassengerId:
+        type: integer
+      Pclass:
+        type: integer
+      Sex:
+        type: string
+      SibSp:
+        type: integer
+      Survived:
+        type: integer
+      Ticket:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API for accessing Titanic passenger data
+  termsOfService: http://swagger.io/terms/
+  title: Titanic Service API
+  version: "1.0"
+paths:
+  /fare-histogram:
+    get:
+      description: Get a histogram of fare prices in percentiles
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: integer
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get fare histogram
+      tags:
+      - passengers
+  /passenger-attributes/{id}:
+    get:
+      description: Get selected attributes of passenger by PassengerId in JSON format
+      parameters:
+      - description: Passenger ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: List of attributes to retrieve
+        in: query
+        name: attributes
+        required: true
+        type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get selected attributes of passenger by ID
+      tags:
+      - passengers
+  /passengers:
+    get:
+      description: Get a list of all passengers in JSON format
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Passenger'
+            type: array
+      summary: Get all passengers
+      tags:
+      - passengers
+  /passengers/{id}:
+    get:
+      description: Get passenger data by PassengerId in JSON format
+      parameters:
+      - description: Passenger ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Passenger'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get passenger by ID
+      tags:
+      - passengers
+swagger: "2.0"

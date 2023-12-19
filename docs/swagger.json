@@ -1,0 +1,199 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for accessing Titanic passenger data",
+        "title": "Titanic Service API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/v1",
+    "paths": {
+        "/fare-histogram": {
+            "get": {
+                "description": "Get a histogram of fare prices in percentiles",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "passengers"
+                ],
+                "summary": "Get fare histogram",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passenger-attributes/{id}": {
+            "get": {
+                "description": "Get selected attributes of passenger by PassengerId in JSON format",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "passengers"
+                ],
+                "summary": "Get selected attributes of passenger by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Passenger ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "description": "List of attributes to retrieve",
+                        "name": "attributes",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passengers": {
+            "get": {
+                "description": "Get a list of all passengers in JSON format",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "passengers"
+                ],
+                "summary": "Get all passengers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Passenger"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passengers/{id}": {
+            "get": {
+                "description": "Get passenger data by PassengerId in JSON format",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "passengers"
+                ],
+                "summary": "Get passenger by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Passenger ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Passenger"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Passenger": {
+            "type": "object",
+            "properties": {
+                "Age": {
+                    "type": "number"
+                },
+                "Cabin": {
+                    "type": "string"
+                },
+                "Embarked": {
+                    "type": "string"
+                },
+                "Fare": {
+                    "type": "number"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Parch": {
+                    "type": "integer"
+                },
+                "PassengerId": {
+                    "type": "integer"
+                },
+                "Pclass": {
+                    "type": "integer"
+                },
+                "Sex": {
+                    "type": "string"
+                },
+                "SibSp": {
+                    "type": "integer"
+                },
+                "Survived": {
+                    "type": "integer"
+                },
+                "Ticket": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

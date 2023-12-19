@@ -1,0 +1,37 @@
+
+# Titanic Passenger Data Web Service
+
+This Go project provides a web service for analyzing Titanic passenger data. It includes functionality to retrieve fare histograms, passenger details, and more.
+
+## Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+## Getting Started
+
+### Building the Docker Images
+
+To build the Docker images for the application and the SQLite database, run the following command:
+
+```bash
+docker-compose build
+```
+### Running the Docker Containers
+
+Start the Docker containers with the following command:
+```bash
+docker-compose up
+
+```
+
+## API Documentation
+Swagger documentation for the APIs can be accessed at http://localhost:8080/swagger/index.html when the application is running.
+
+Endpoints
+GET /passengers/fare-histogram: Get fare histogram in percentiles.
+GET /passengers/{id}: Get passenger details by PassengerId.
+GET /passengers/{id}/attributes: Get selected attributes of a passenger by PassengerId.
+GET /passengers: Get a list of all passengers.

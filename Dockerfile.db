@@ -1,0 +1,16 @@
+# Use an official SQLite image as a parent image
+FROM alpine
+
+# Set the working directory to /db
+WORKDIR /db
+
+# Install SQLite
+RUN apk --no-cache add sqlite
+
+# Copy the SQLite database file into the container at /db
+COPY ./datastore/titanic.db .
+
+# Expose any necessary ports for the database
+
+# Command to run the SQLite database
+CMD ["sqlite3", "titanic.db"]
