@@ -1,0 +1,4 @@
+apiVersion: v2
+name: my-titanic-chart
+description: A Helm chart for deploying Titanic service and SQLite on Kubernetes
+version: 0.1.0

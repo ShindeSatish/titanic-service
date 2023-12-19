@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-titanic-release
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-titanic-chart
+  template:
+    metadata:
+      labels:
+        app: my-titanic-chart
+    spec:
+      containers:
+        - name: my-titanic-chart
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8080

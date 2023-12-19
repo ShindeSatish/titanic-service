@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: shindesatishsss/titanic-service-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  name: titanic-service
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  hosts:
+    - host: chart-example.local
+      paths:
+        - /

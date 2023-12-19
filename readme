@@ -35,3 +35,39 @@ GET /passengers/fare-histogram: Get fare histogram in percentiles.
 GET /passengers/{id}: Get passenger details by PassengerId.
 GET /passengers/{id}/attributes: Get selected attributes of a passenger by PassengerId.
 GET /passengers: Get a list of all passengers.
+
+
+### Deployement with Helm and kubernetes 
+
+####  prerequisite to run cluster
+- make sure the docker desktop kubernetes local is enabled
+- make sure helm is installed. find more information here - https://helm.sh/docs/intro/install/
+
+After setup the prerequisite
+Run following command to setup k8s cluster
+```
+cd my-titanic-chart
+helm upgrade --install my-titanic-release .
+
+```
+
+To check the running pods and services 
+```
+kubectl get pods
+kubectl get service
+
+```
+- result of kubectl get pods
+
+![Alt text](image-1.png)
+
+After checking this
+
+use this link to access the service running in kubernetes cluster
+http://localhost:<replace the port>/v1/swagger/index.html
+
+![Alt text](image.png)
+
+NOTE - replace the titanic-service node-port in above URL. 
+like shows in above image check port and replace in url.
+http://localhost:32150/v1/swagger/index.html
